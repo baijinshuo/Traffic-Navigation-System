@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-8 8:35:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.wangyan.bean">
+    <class name="Way" table="WAY">
+        <id name="id_key" type="long">
+            <column name="ID_KEY" />
+            <generator class="native" />
+        </id>
+        <property name="id" type="string">
+            <column name="ID" />
+        </property>
+        <property name="version" type="int">
+            <column name="VERSION" />
+        </property>
+        <property name="time" type="timestamp">
+            <column name="TIME" />
+        </property>
+        <property name="changeset" type="string">
+            <column name="CHANGESET" />
+        </property>
+        <property name="uid" type="string">
+            <column name="UID" />
+        </property>
+        <property name="user" type="string">
+            <column name="USER" />
+        </property>
+        
+        <!-- Way和Node的多对多映射,node有序 -->
+        <list name="nodes" table="NODE_WAY" inverse="false" lazy="true">
+            <key>
+                <column name="WAY_ID" />
+            </key>
+            <list-index>
+            	<column name="NODE_INDEX"></column>
+            </list-index>
+            <many-to-many class="Node" column="NODE_ID"/>
+        </list>
+        
+        <!-- Way和WayInfo的一对多映射 -->
+        <set name="infos" table="WAYINFO" inverse="false" lazy="false">
+        	<key>
+        		<column name="WAY_ID"/>
+        	</key>
+        	<one-to-many class="WayInfo"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-7 15:08:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.wangyan.bean">
+    <class name="Node" table="NODE">
+        <id name="id_key" type="long">
+            <column name="ID_KEY" />
+            <generator class="native" />
+        </id>
+        <property name="id" type="string">
+            <column name="ID" />
+        </property>
+        <property name="lat" type="double">
+            <column name="LAT" />
+        </property>
+        <property name="lon" type="double">
+            <column name="LON" />
+        </property>
+        <property name="version" type="int">
+            <column name="VERSION" />
+        </property>
+        <property name="time" type="timestamp">
+            <column name="TIME" />
+        </property>
+        <property name="changeset" type="string">
+            <column name="CHANGESET" />
+        </property>
+        <property name="uid" type="string">
+            <column name="UID" />
+        </property>
+        <property name="user" type="string">
+            <column name="USER" />
+        </property>
+        
+        <!-- Node和NodeInfo的一对多映射 -->
+        <set name="infos" table="NODEINFO" inverse="false" lazy="false">
+            <key>
+                <column name="NODE_ID" />
+            </key>
+            <one-to-many class="NodeInfo" />
+        </set>
+        
+        <!-- Node和Way的多对多映射 -->
+        <set name="ways" table="NODE_WAY" inverse="true" lazy="true">
+            <key>
+                <column name="NODE_ID" />
+            </key>
+            <!-- <list-index>
+            	<column name="WAY_INDEX"></column>
+            </list-index> -->
+            <many-to-many class="Way" column="WAY_ID"/>
+        </set>
+        
+        <set name="chainNodes" table="CHAINNODE" inverse="false" lazy="true">
+        	<key>
+                <column name="NODE_ID" />
+            </key>
+            <one-to-many class="ChainNode"/>
+        </set>
+    </class>
+</hibernate-mapping>

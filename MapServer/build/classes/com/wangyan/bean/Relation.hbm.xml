@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-8 14:05:33 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.wangyan.bean">
+    <class name="Relation" table="RELATION">
+        <id name="id_key" type="long">
+            <column name="ID_KEY" />
+            <generator class="native" />
+        </id>
+        <property name="id" type="string">
+            <column name="ID" />
+        </property>
+        <property name="version" type="int">
+            <column name="VERSION" />
+        </property>
+        <property name="time" type="timestamp">
+            <column name="TIME" />
+        </property>
+        <property name="changeset" type="string">
+            <column name="CHANGESET" />
+        </property>
+        <property name="uid" type="string">
+            <column name="UID" />
+        </property>
+        <property name="user" type="string">
+            <column name="USER" />
+        </property>
+        
+        <!-- 与RelationInfo的一对多关系 -->
+        <set name="infos" table="RELATIONINFO" inverse="false" lazy="true">
+            <key>
+                <column name="RELATION_ID" />
+            </key>
+            <one-to-many class="RelationInfo" />
+        </set>
+        
+        <list name="contents" table="RELATIONCONTENT" inverse="false" lazy="true">
+        	<key>
+        		<column name="RELATION_ID"></column>
+        	</key>
+        	<list-index>
+        		<column name="CONTENTS_INDEX"></column>
+        	</list-index>
+        	<one-to-many class="RelationContent" />
+        </list>
+    </class>
+</hibernate-mapping>

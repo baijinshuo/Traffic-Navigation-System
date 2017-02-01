@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-7 15:54:53 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.wangyan.bean">
+    <class name="NodeInfo" table="NODEINFO">
+        <id name="id_key" type="long">
+            <column name="ID_KEY" />
+            <generator class="native" />
+        </id>
+        <property name="info_key" type="string">
+            <column name="INFO_KEY" />
+        </property>
+        
+        <property name="info_value" type="string">
+            <column name="INFO_VALUE" />
+        </property>
+        
+        <many-to-one name="node" class="Node">
+            <column name="NODE_ID" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

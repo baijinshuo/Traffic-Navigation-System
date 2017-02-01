@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-9-9 8:49:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.wangyan.bean">
+    <class name="RelationContent" table="RELATIONCONTENT">
+        <id name="id_key" type="long">
+            <column name="ID_key" />
+            <generator class="native" />
+        </id>
+        <property name="id" type="string">
+            <column name="ID" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" />
+        </property>
+        <property name="role" type="string">
+            <column name="ROLE" />
+        </property>
+        <many-to-one name="relation" class="Relation">
+            <column name="RELATION_ID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
